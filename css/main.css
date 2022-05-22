@@ -45,9 +45,7 @@
     margin: 10px 0;
     outline: none;
   }
-  .container .content > input:nth-child(1),
-  .container .content > input:nth-child(6),
-  .container .content > input:nth-child(7){
+  .container .content > input{
       width: 100% !important;
   }
   .container .content > input:nth-child(2),
@@ -82,11 +80,9 @@
   .container .search > input {
       width: 100%;
   }
-  .container .search >button:first-of-type{
-      margin-right:40px !important;
-  }
   .container .search >button:not(:last-of-type){
-      width: 48% !important;
+      width: 49% !important;
+      margin-right: 5px;
   }
   .container .search>button:last-of-type{
      width:100%;
@@ -110,7 +106,7 @@ tr:not(:last-child) {
  padding: 10px;
  text-transform: uppercase;
 }
-.container .data-table tr td>button {
+.actions-buttons {
     padding: 6px;
     text-transform: uppercase;
     background-color: var(--green-color);
@@ -131,14 +127,14 @@ tr:not(:last-child) {
         max-width: 100%!important;
     }
   }
-  @media (min-width: 731px) and (max-width:1399px) {
+  /* @media (min-width: 731px) and (max-width:1399px) {
     .container .content > input{
         width: 300px !important;
     }
     .container .search >button {
         width: 100% !important;
     }
-  }
+  } */
   @media (width:1400px) {
     .container .content > input:nth-child(2),
     .container .content > input:nth-child(3),
