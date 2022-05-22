@@ -1,0 +1,167 @@
+/* Globals */
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+:root{
+    --text-color:aliceblue;
+    --green-color:cadetblue;
+    --border-radius: 5px;
+    --font-family:system-ui;
+    --letter-spacing: 1.5px;
+    --font-size-small: 10px;
+}
+  body {
+      padding: 0;
+      margin: 0;
+      background-color: #333;
+      color: var(--text-color);
+  }
+::placeholder{
+    text-transform: uppercase;
+}
+/* ************************************************************************** */
+.container {
+    padding: 30px 40px ;
+  }
+
+.container h1 {
+    font-size: 24px;
+    font-family:var(--font-family);
+    text-align: center;
+    letter-spacing: var(--letter-spacing);
+    text-transform: uppercase;
+  }
+  /****************************** Start Content & Search sections ******************************/
+  .container .content,
+  .container .search 
+   {
+    padding: 0 25px;
+  }
+  .container .content > input,
+  .container .search > input  {
+    padding: 10px;
+    margin: 10px 0;
+    outline: none;
+  }
+  .container .content > input:nth-child(1),
+  .container .content > input:nth-child(6),
+  .container .content > input:nth-child(7){
+      width: 100% !important;
+  }
+  .container .content > input:nth-child(2),
+  .container .content > input:nth-child(3),
+  .container .content > input:nth-child(4),
+  .container .content > input:nth-child(5) {
+      width:250px !important;
+  }
+  .container .content >span{
+      display: inline-block;
+      background-color: var(--green-color);
+      padding: 5px;
+      border-radius: var(--border-radius);
+  }
+  .container .content >button{
+   width: 100%;
+  }
+  .container .content >button,
+  .container .search >button {
+      padding: 10px;
+      margin: 10px 0;
+      background-color: var(--green-color);
+      border: none;
+      border-radius: var(--border-radius);
+      color: var(--text-color);
+      font-family:var(--font-family);
+      font-weight: bold;
+      letter-spacing: var(--letter-spacing);
+      cursor: pointer;
+      text-transform: uppercase;
+  }
+  .container .search > input {
+      width: 100%;
+  }
+  .container .search >button:first-of-type{
+      margin-right:40px !important;
+  }
+  .container .search >button:not(:last-of-type){
+      width: 48% !important;
+  }
+  .container .search>button:last-of-type{
+     width:100%;
+  }
+  /****************************** End Content & Search sections ******************************/
+
+  /********************************* Start Data sections *************************************/
+.container .data-table {
+    margin-top: 25px;
+    width: 100%;
+    border-collapse: collapse;
+}
+ tr:first-child {
+    border-top: 1pt solid var(--text-color);
+    border-bottom: 1pt solid var(--text-color);
+}
+tr:not(:last-child) {
+    border-bottom: 1pt solid lightgray;
+}
+.container .data-table tr td {
+ padding: 10px;
+ text-transform: uppercase;
+}
+.container .data-table tr td>button {
+    padding: 6px;
+    text-transform: uppercase;
+    background-color: var(--green-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-small);
+}
+  /********************************* End Data sections *********************************/
+
+  /********************************* Start Media query *********************************/
+  @media (max-width: 730px) {
+    .container .content > input{
+        width: 100% !important;
+    }
+    .container .search >button {
+        width: 100% !important;
+        max-width: 100%!important;
+    }
+  }
+  @media (min-width: 731px) and (max-width:1399px) {
+    .container .content > input{
+        width: 300px !important;
+    }
+    .container .search >button {
+        width: 100% !important;
+    }
+  }
+  @media (width:1400px) {
+    .container .content > input:nth-child(2),
+    .container .content > input:nth-child(3),
+    .container .content > input:nth-child(4),
+    .container .content > input:nth-child(5) {
+        width: 314px !important
+    }
+  }
+  @media (min-width:1440px) {
+    .container .content > input:nth-child(2),
+    .container .content > input:nth-child(3),
+    .container .content > input:nth-child(4),
+    .container .content > input:nth-child(5) {
+        width: 324px;
+    }
+  }
+  @media (min-width:1680px) {
+    .container .content > input:nth-child(2),
+    .container .content > input:nth-child(3),
+    .container .content > input:nth-child(4),
+    .container .content > input:nth-child(5) {
+        width: 384px;
+    }
+  }
+  /********************************* End Media query *********************************/
+  
