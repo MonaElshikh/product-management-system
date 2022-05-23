@@ -4,29 +4,42 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content=">Product Managment applying CRUDS with javascript"
+    />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="icon" type="image/svg" href="images/favicon.svg" />
     <title>Product Management System | Mona Elshikh</title>
   </head>
   <body>
-    <section class="container" role="main">
+    <section class="container" role="main" >
       <h1>Product Managment System</h1>
       <section class="content">
         <input type="text" placeholder="title" name="title" />
-        <input type="text" placeholder="price" name="price" />
-        <input type="text" placeholder="taxes" name="taxes" />
-        <input type="text" placeholder="ads" name="ads" />
-        <input type="text" placeholder="discount" name="discount" />
+        <input type="number" placeholder="price" name="price" />
+        <input type="number" placeholder="taxes" name="taxes" />
+        <input type="number" placeholder="ads" name="ads" />
+        <input type="number" placeholder="discount" name="discount" />
         <span>Total: <label name="total"></label></span>
-        <input type="text" placeholder="count" name="count" />
+        <input type="number" placeholder="count" name="count" />
         <input type="text" placeholder="category" name="category" />
-        <button id="btnCreate">Create</button>
+        <div id="add-buttons">
+          <button id="btnCreate" class="btn-big">Create</button
+          ><button id="btnCancel" class="btn-hidden btn-small">Cancel</button>
+        </div>
       </section>
       <section class="search">
         <input type="text" name="search" placeholder="Search" />
-        <button id="btn-search-title">Search by title</button>
-        <button id="btn-search-cat">Search by category</button>
-        <button id="btn-delete-all">Delete All</button>
+        <div class="search-buttons">
+          <button id="btn-search-title" class="btn-small">
+            Search by title
+          </button>
+          <button id="btn-search-cat" class="btn-small">
+            Search by category
+          </button>
+        </div>
+        <button id="btn-delete-all" class="btn-big">Delete All</button>
       </section>
       <section class="data">
         <table class="data-table">
@@ -48,7 +61,7 @@
         </table>
       </section>
     </section>
-
-    <script src="js/main.js"></script>
+    <script src="js/main.js" type="module"></script>
+    <script src="js/product-managment.js" type="module"></script>
   </body>
 </html>

@@ -18,8 +18,20 @@
       background-color: #333;
       color: var(--text-color);
   }
+  html{
+    scroll-behavior: smooth;
+  }
 ::placeholder{
     text-transform: uppercase;
+}
+input{
+  border-radius: var(--border-radius);
+}
+input:focus{
+  box-shadow:0 0 5px 1px lightseagreen inset;
+}
+button:hover{
+  box-shadow: 0 0 5px 1px wheat inset;
 }
 /* ************************************************************************** */
 .container {
@@ -63,37 +75,61 @@
   .container .content >button{
    width: 100%;
   }
-  .container .content >button,
-  .container .search >button {
-      padding: 10px;
-      margin: 10px 0;
-      background-color: var(--green-color);
-      border: none;
-      border-radius: var(--border-radius);
-      color: var(--text-color);
-      font-family:var(--font-family);
-      font-weight: bold;
-      letter-spacing: var(--letter-spacing);
-      cursor: pointer;
-      text-transform: uppercase;
+  .btn-small{
+    width: 49% !important;
   }
+  .btn-big {
+    width: 100% !important;
+  }
+  .btn-small,
+  .btn-big {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: var(--green-color);
+    border: none;
+    border-radius: var(--border-radius);
+    color: var(--text-color);
+    font-family:var(--font-family);
+    font-weight: bold;
+    letter-spacing: var(--letter-spacing);
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  
   .container .search > input {
       width: 100%;
   }
   .container .search >button:not(:last-of-type){
       width: 49% !important;
-      margin-right: 5px;
   }
   .container .search>button:last-of-type{
      width:100%;
   }
+  .search-buttons{
+    display: flex;
+    justify-content: space-between;
+  }
+  .btn-hidden{
+    display: none;
+    width: 49%;
+    margin-right: 10px;
+  }
   /****************************** End Content & Search sections ******************************/
 
   /********************************* Start Data sections *************************************/
+  .container .data {
+    overflow-x: auto;
+  }
 .container .data-table {
     margin-top: 25px;
     width: 100%;
     border-collapse: collapse;
+}
+.container .data-table >tbody:first-child>tr{
+  text-transform: uppercase;
+  color: var(--green-color);
+  font-size: 16px;
+  font-weight: bold;
 }
  tr:first-child {
     border-top: 1pt solid var(--text-color);
@@ -104,7 +140,6 @@ tr:not(:last-child) {
 }
 .container .data-table tr td {
  padding: 10px;
- text-transform: uppercase;
 }
 .actions-buttons {
     padding: 6px;
