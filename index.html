@@ -9,20 +9,25 @@
       content=">Product Managment applying CRUDS with javascript"
     />
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/model-popup.css" />
     <link rel="icon" type="image/svg" href="images/favicon.svg" />
     <title>Product Management System | Mona Elshikh</title>
   </head>
   <body>
-    <section class="container" role="main" >
+    <!-- The Modal -->
+    <section id="myModal" class="modal"></div>
+    </section>
+    <!-- End -->
+    <section class="container" role="main">
       <h1>Product Managment System</h1>
       <section class="content">
         <input type="text" placeholder="title" name="title" />
-        <input type="number" placeholder="price" name="price" />
-        <input type="number" placeholder="taxes" name="taxes" />
-        <input type="number" placeholder="ads" name="ads" />
-        <input type="number" placeholder="discount" name="discount" />
+        <input type="number" placeholder="price" name="price" value="0"/>
+        <input type="number" placeholder="taxes" name="taxes" value="0"/>
+        <input type="number" placeholder="ads" name="ads" value="0"/>
+        <input type="number" placeholder="discount" name="discount" value="0"/>
         <span>Total: <label name="total"></label></span>
-        <input type="number" placeholder="count" name="count" />
+        <input type="number" placeholder="count" name="count" value="1"/>
         <input type="text" placeholder="category" name="category" />
         <div id="add-buttons">
           <button id="btnCreate" class="btn-big">Create</button
@@ -39,9 +44,14 @@
             Search by category
           </button>
         </div>
-        <button id="btn-delete-all" class="btn-big">Delete All</button>
       </section>
       <section class="data">
+        <div class="table-header">
+          <h3 id="products-no"></h3>
+          <button id="btn-delete-all" class="actions-buttons">
+            Delete All
+          </button>
+        </div>
         <table class="data-table">
           <tbody>
             <tr>
@@ -63,5 +73,6 @@
     </section>
     <script src="js/main.js" type="module"></script>
     <script src="js/product-managment.js" type="module"></script>
+    <script src="js/model-popup.js" type="module"></script>
   </body>
 </html>

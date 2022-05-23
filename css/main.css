@@ -66,17 +66,35 @@ button:hover{
   .container .content > input:nth-child(5) {
       width:250px !important;
   }
-  .container .content >span{
+  .container .content >span {
       display: inline-block;
       background-color: var(--green-color);
       padding: 5px;
       border-radius: var(--border-radius);
   }
-  .container .content >button{
+  .container .content >button {
    width: 100%;
   }
+  .container .search > input {
+      width: 100%;
+  }
+  .container .search >button:not(:last-of-type) {
+      width: 49% !important;
+  }
+  .container .search>button:last-of-type {
+     width:100%;
+  }
+  .search-buttons{
+    display: flex;
+    justify-content: space-between;
+  }
+  .btn-hidden {
+    display: none;
+    width: 49%;
+    margin-right: 10px;
+  }
   .btn-small{
-    width: 49% !important;
+    width: 30% !important;
   }
   .btn-big {
     width: 100% !important;
@@ -95,37 +113,29 @@ button:hover{
     cursor: pointer;
     text-transform: uppercase;
   }
-  
-  .container .search > input {
-      width: 100%;
-  }
-  .container .search >button:not(:last-of-type){
-      width: 49% !important;
-  }
-  .container .search>button:last-of-type{
-     width:100%;
-  }
-  .search-buttons{
-    display: flex;
-    justify-content: space-between;
-  }
-  .btn-hidden{
-    display: none;
-    width: 49%;
-    margin-right: 10px;
-  }
   /****************************** End Content & Search sections ******************************/
 
   /********************************* Start Data sections *************************************/
   .container .data {
     overflow-x: auto;
+    border-top: solid 2px var(--text-color);
+    border-bottom: solid 2px var(--text-color);
+    margin-top: 10px;
+  }
+  .container .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .container .data .table-header> h3 {
+    text-transform: uppercase;
+    color: var(--green-color);
   }
 .container .data-table {
-    margin-top: 25px;
     width: 100%;
     border-collapse: collapse;
 }
-.container .data-table >tbody:first-child>tr{
+.container .data-table >tbody:first-child>tr {
   text-transform: uppercase;
   color: var(--green-color);
   font-size: 16px;
@@ -162,14 +172,6 @@ tr:not(:last-child) {
         max-width: 100%!important;
     }
   }
-  /* @media (min-width: 731px) and (max-width:1399px) {
-    .container .content > input{
-        width: 300px !important;
-    }
-    .container .search >button {
-        width: 100% !important;
-    }
-  } */
   @media (width:1400px) {
     .container .content > input:nth-child(2),
     .container .content > input:nth-child(3),

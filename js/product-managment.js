@@ -24,11 +24,8 @@ class Product {
 }
 let products = [];
 let productId;
-let scrollY;
 //#endregion Declaration
-
 //#region  get page controls
-let body = document.body;
 let title = document.querySelector("[name='title']");
 let price = document.querySelector("[name='price']");
 let taxes = document.querySelector("[name='taxes']");
@@ -46,14 +43,18 @@ let btnCancel = document.querySelector("#btnCancel");
 let contentTable = document.querySelector(".data-table>tbody:last-child");
 let divAddButtons = document.querySelector("#add-buttons");
 let divContainer = document.querySelector(".container");
+let productsNumber = document.querySelector("#products-no");
 //#endregion
-
 //#region  Methods
 //load all products from local storage
 function loadProducts() {
     if (localStorage.getItem("products")) {
         products = JSON.parse(localStorage.getItem("products"));
         createProductsTable(products);
+    }
+    else {
+        btnDeleteAll.style.display = "none";
+        productsNumber.innerHTML = `(0) Products`;
     }
 }
 //add new  product(s)
@@ -73,61 +74,13 @@ function addProducts(count) {
     createProductsTable(products);
     clearData();
 }
-function editProduct(e) {
-    if (e.target.parentElement.parentElement.hasAttribute("data-index")) {
-        productId = e.target.parentElement.parentElement.getAttribute("data-index");
-        products.forEach((p) => {
-            if (p.id == productId) {
-                title.value = p.title;
-                price.value = p.price;
-                taxes.value = p.taxes;
-                ads.value = p.ads;
-                discount.value = p.discount;
-                total.innerHTML = p.total;
-                count.style.display = "none";
-                category.value = p.category;
-                btnCreate.innerHTML = "Update";
-                btnCancel.style.display = "inline-block";
-                btnCreate.classList.remove("btn-big");
-                btnCreate.classList.add("btn-small");
-                btnCancel.classList.add("btn-small");
-                divAddButtons.className = "search-buttons";
-            }
-        });
-        window.scrollTo(0, 0);
-    }
-}
-function updateProduct() {
-    products.forEach((p) => {
-        if (p.id == productId) {
-            p.title = title.value;
-            p.price = price.value;
-            p.taxes = taxes.value;
-            p.ads = ads.value;
-            p.discount = discount.value;
-            p.total = total.innerHTML;
-            p.category = category.value;
-        }
-    });
-    addToLocalStorage(products);
-    loadProducts();
-    clearData(true);
-}
-function deleteProduct(e) {
-    if (e.target.parentElement.parentElement.hasAttribute("data-index")) {
-        productId = e.target.parentElement.parentElement.getAttribute("data-index");
-        products = products.filter(p => p.id != productId);
-    }
-    addToLocalStorage(products);
-    loadProducts();
-}
 //add products to local storage
 function addToLocalStorage(products) {
-    localStorage.setItem("products", JSON.stringify(products));
+    localStorage.setItem("products", JSON.stringify(products.reverse()));
 }
 function createProductsTable(products) {
     contentTable.innerHTML = "";
-    btnDeleteAll.innerHTML = `Delete All (${products.length})`;
+    productsNumber.innerHTML = `(${products.length}) Products`;
     products.forEach((product) => {
         let tr = document.createElement("tr");
         tr.style.cursor = "pointer";
@@ -163,17 +116,80 @@ function createProductsTable(products) {
         tr.append(tdId, tdTitle, tdPrice, tdTaxes, tdAds, tdDiscount, tdTotal, tdCategory, tdUpdate, tdDelete);
         contentTable.appendChild(tr);
     });
+    btnDeleteAll.style.display = "block";
 }
-//clear product data from fields  after adding it 
+function getSelectedProduct(e) {
+    if (e.target.parentElement.parentElement.hasAttribute("data-index")) {
+        productId = e.target.parentElement.parentElement.getAttribute("data-index");
+    }
+}
+function editProduct() {
+    products.forEach((p) => {
+        if (p.id == productId) {
+            title.value = p.title;
+            price.value = p.price;
+            taxes.value = p.taxes;
+            ads.value = p.ads;
+            discount.value = p.discount;
+            total.innerHTML = p.total;
+            count.style.display = "none";
+            category.value = p.category;
+            btnCreate.innerHTML = "Update";
+            btnCancel.style.display = "inline-block";
+            btnCreate.classList.remove("btn-big");
+            btnCreate.classList.add("btn-small");
+            btnCancel.classList.add("btn-small");
+            divAddButtons.className = "search-buttons";
+        }
+    });
+    window.scrollTo(0, 0);
+}
+function updateProduct() {
+    products.forEach((p) => {
+        if (p.id == productId) {
+            p.title = title.value;
+            p.price = price.value;
+            p.taxes = taxes.value;
+            p.ads = ads.value;
+            p.discount = discount.value;
+            p.total = total.innerHTML;
+            p.category = category.value;
+        }
+    });
+    addToLocalStorage(products);
+    loadProducts();
+    clearData(true);
+}
+function deleteProduct() {
+    products = products.filter(p => p.id != productId);
+    addToLocalStorage(products);
+    loadProducts();
+}
+function deleteAllProducts() {
+    products = [];
+    localStorage.clear();
+    contentTable.innerHTML = "";
+}
+// search by title
+function searchByTitle(title) {
+    products = products.filter(p => p.title.toLowerCase().includes(title.toLowerCase()));
+    createProductsTable(products);
+}
+// search by title
+function searchByCategory(category) {
+    products = products.filter(p => p.category.toLowerCase().includes(category.toLowerCase()));
+    createProductsTable(products);
+}
+//clear product data
 function clearData(cancelUpdate = false) {
     title.value = "";
-    price.value = "";
-    taxes.value = "";
-    ads.value = "";
-    discount.value = "";
+    price.value = "0";
+    taxes.value = "0";
+    ads.value = "0";
+    discount.value = "0";
     category.value = "";
     total.innerHTML = "";
-    count.value = "";
+    count.value = "1";
     if (cancelUpdate) {
         btnCreate.innerHTML = "Create";
         btnCreate.classList.remove("btn-small");
@@ -183,15 +199,18 @@ function clearData(cancelUpdate = false) {
         divAddButtons.classList.remove("search-buttons");
     }
 }
-function deleteAllProducts() {
-    localStorage.clear();
-    contentTable.innerHTML = "";
+
+function validate() {
+    if (title.value == "" || category.value == "" || price.value == 0 || taxes.value == 0 || ads.value == 0) {
+        return false;
+    }
+    return true;
 }
 //#endregion
 export {
-    Product, productId, products, scrollY, title, price, taxes, ads,
+    Product, productId, products, title, price, taxes, ads,
     discount, total, count, category, search, btnCreate, btnSearchByTitle,
-    btnSearchByCat, btnDeleteAll, btnCancel, contentTable, divAddButtons, divContainer, body,
-    loadProducts, addProducts, editProduct, updateProduct,
-    addToLocalStorage, createProductsTable, clearData, deleteProduct, deleteAllProducts
+    btnSearchByCat, btnDeleteAll, btnCancel, contentTable, divAddButtons, divContainer, productsNumber,
+    loadProducts, addProducts, editProduct, updateProduct, searchByTitle, searchByCategory, validate,
+    addToLocalStorage, createProductsTable, clearData, deleteProduct, deleteAllProducts, getSelectedProduct
 };
