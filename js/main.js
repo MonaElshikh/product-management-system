@@ -1,6 +1,9 @@
+
+//#region imporst and declarations
 import * as productManagment from "/js/product-managment.js";
 import { openModal, closeModal, modal } from "/js/model-popup.js";
-const modeDesign = ` <!-- Modal content -->
+const modeDesign = ` 
+<!-- Modal content -->
 <div class="modal-content">
   <div class="modal-header">
     <span class="close">&times;</span>
@@ -14,9 +17,20 @@ const modeDesign = ` <!-- Modal content -->
     </div>
   </div>
 </div>`;
+//#endregion
 //#region Calls
 //load  products
 productManagment.loadProducts();
+
+// set default page theme 
+if (!localStorage.getItem("data-color")) {
+    productManagment.colorIndicator.setAttribute("data-color", "dark");
+    productManagment.setPageTheme("dark");
+}
+else {
+    console.log(`inside else main.js loading the current theme.`);
+    productManagment.setPageTheme(localStorage.getItem("data-color"));
+}
 //calculate total price after moving from in ads button input
 productManagment.ads.addEventListener("blur", function () {
     productManagment.total.innerHTML =
@@ -24,6 +38,7 @@ productManagment.ads.addEventListener("blur", function () {
         + parseInt(productManagment.taxes.value)
         + parseInt(productManagment.ads.value);
 });
+
 // sub the discount if it is found
 productManagment.discount.addEventListener("blur", function () {
     productManagment.total.innerHTML =
@@ -32,49 +47,62 @@ productManagment.discount.addEventListener("blur", function () {
         + parseInt(productManagment.ads.value)
         - parseInt(productManagment.discount.value);
 });
+
 //Create button
 productManagment.btnCreate.addEventListener("click", function () {
     if (productManagment.validate()) {
         if (this.innerHTML === "Update") {
             productManagment.updateProduct();
+            productManagment.setPageTheme(localStorage.getItem("data-color"));
         }
         else {
             productManagment.addProducts(parseInt(productManagment.count.value));
+            productManagment.setPageTheme(localStorage.getItem("data-color"));
         }
     }
 });
+
 // search by title button
 productManagment.btnSearchByTitle.addEventListener("click", function () {
     if (productManagment.search.value) {
         productManagment.searchByTitle(productManagment.search.value);
+        productManagment.setPageTheme(localStorage.getItem("data-color"));
     }
     else {
         return false;
     }
 });
+
 // search by category
 productManagment.btnSearchByCat.addEventListener("click", function () {
     if (productManagment.search.value) {
         productManagment.searchByCategory(productManagment.search.value);
+        productManagment.setPageTheme(localStorage.getItem("data-color"));
     }
     else {
         return false;
     }
 });
+
 // Reset search
 productManagment.search.addEventListener("keyup", function (e) {
     if (e.target.value.length == 0) {
         productManagment.loadProducts();
+        productManagment.setPageTheme(localStorage.getItem("data-color"));
     }
 });
+
 // cancel button
 productManagment.btnCancel.addEventListener("click", function () {
     productManagment.clearData(true);
+    productManagment.setPageTheme(localStorage.getItem("data-color"));
 });
+
 // DeleteAll button
 productManagment.btnDeleteAll.addEventListener("click", function () {
     openModal(modeDesign, "Delete All! Are your sure?", "Delete All", "sm", true);
 });
+
 // edit/delete product
 productManagment.contentTable.addEventListener("click", function (e) {
     productManagment.getSelectedProduct(e);
@@ -84,6 +112,7 @@ productManagment.contentTable.addEventListener("click", function (e) {
             break;
         case "Update":
             productManagment.editProduct();
+            productManagment.setPageTheme(localStorage.getItem("data-color"));
             break;
     }
 });
@@ -91,6 +120,7 @@ productManagment.contentTable.addEventListener("click", function (e) {
 // model popup actions
 modal.addEventListener("click", function (e) {
     closeModal();
+    productManagment.setPageTheme(localStorage.getItem("data-color"));
     if (e.target.hasAttribute("data-deleteall")) { // delete all button clicked
         if (e.target.innerHTML == "Yes") {
             productManagment.productsNumber.innerHTML = `(0) Products`;
@@ -102,7 +132,12 @@ modal.addEventListener("click", function (e) {
     {
         if (e.target.innerHTML == "Yes") {
             productManagment.deleteProduct(e);
+            productManagment.setPageTheme(localStorage.getItem("data-color"));
         }
     }
+});
+// change page color mode
+productManagment.colorIndicator.addEventListener("click", function () {
+    productManagment.togglePageTheme();
 });
 //#endregion

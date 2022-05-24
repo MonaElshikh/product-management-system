@@ -24,8 +24,11 @@ class Product {
 }
 let products = [];
 let productId;
+let buttons;
 //#endregion Declaration
+
 //#region  get page controls
+let body = document.body;
 let title = document.querySelector("[name='title']");
 let price = document.querySelector("[name='price']");
 let taxes = document.querySelector("[name='taxes']");
@@ -44,7 +47,19 @@ let contentTable = document.querySelector(".data-table>tbody:last-child");
 let divAddButtons = document.querySelector("#add-buttons");
 let divContainer = document.querySelector(".container");
 let productsNumber = document.querySelector("#products-no");
+let colorIndicator = document.querySelector("#color-indicator");
+let colorButton = document.querySelector(".color-mode");
+colorButton.title = "Switch page color";
+let inputs = Array.from(document.querySelectorAll("input"));
+let h1 = document.querySelector("h1");
+let h3 = document.querySelector("h3");
+let tableheadrs = Array.from(document.querySelectorAll(".data-table td"));
+let divTableHeader = document.querySelector(".table-header");
+let divDataTable = document.querySelector(".data-table");
+let tableTitles = document.querySelector(".data-table>tbody>tr")
+
 //#endregion
+
 //#region  Methods
 //load all products from local storage
 function loadProducts() {
@@ -81,6 +96,7 @@ function addToLocalStorage(products) {
 function createProductsTable(products) {
     contentTable.innerHTML = "";
     productsNumber.innerHTML = `(${products.length}) Products`;
+    btnDeleteAll.style.display = "block";
     products.forEach((product) => {
         let tr = document.createElement("tr");
         tr.style.cursor = "pointer";
@@ -105,18 +121,18 @@ function createProductsTable(products) {
         let tdDelete = document.createElement("td");
         let btnUpdate = document.createElement("button");
         btnUpdate.innerHTML = "Update";
-        btnUpdate.className = "actions-buttons";
+        btnUpdate.classList.add("actions-buttons");
         tdUpdate.appendChild(btnUpdate);
         let btnDelete = document.createElement("button");
         btnDelete.innerHTML = "Delete";
         btnUpdate.style.cursor = "pointer";
-        btnDelete.className = "actions-buttons";
+        btnDelete.classList.add("actions-buttons");
         btnDelete.style.cursor = "pointer";
         tdDelete.appendChild(btnDelete);
         tr.append(tdId, tdTitle, tdPrice, tdTaxes, tdAds, tdDiscount, tdTotal, tdCategory, tdUpdate, tdDelete);
         contentTable.appendChild(tr);
     });
-    btnDeleteAll.style.display = "block";
+    buttons = Array.from(document.querySelectorAll("button"));
 }
 function getSelectedProduct(e) {
     if (e.target.parentElement.parentElement.hasAttribute("data-index")) {
@@ -167,7 +183,7 @@ function deleteProduct() {
 }
 function deleteAllProducts() {
     products = [];
-    localStorage.clear();
+    localStorage.removeItem("products");
     contentTable.innerHTML = "";
 }
 // search by title
@@ -199,18 +215,59 @@ function clearData(cancelUpdate = false) {
         divAddButtons.classList.remove("search-buttons");
     }
 }
-
 function validate() {
     if (title.value == "" || category.value == "" || price.value == 0 || taxes.value == 0 || ads.value == 0) {
         return false;
     }
     return true;
 }
+function addColorModeToLocalStorage(currentMode) {
+    localStorage.setItem("data-color", currentMode);
+}
+// reset all controls themes
+function resetPageThemes() {
+    body.classList.remove("light", "dark");
+    h1.classList.remove("light", "dark");
+    h3.classList.remove("light", "dark");
+    total.classList.remove("light", "dark");
+    divTableHeader.classList.remove("light", "dark");
+    divTableHeader.classList.remove("light", "dark");
+    divDataTable.classList.remove("light", "dark");
+    tableTitles.classList.remove("light", "dark");
+    inputs.forEach(input => input.classList.remove("light", "dark"));
+    if (buttons) {
+        buttons.forEach(button => button.classList.remove("light", "dark"));
+    }
+    tableheadrs.forEach(header => header.classList.remove("light", "dark"));
+}
+// set all controls themes
+function setPageTheme(dataColor) {
+    resetPageThemes();
+    body.classList.add(dataColor);
+    h1.classList.add(dataColor);
+    h3.classList.add(dataColor);
+    total.classList.add(dataColor);
+    divTableHeader.classList.add(dataColor);
+    divDataTable.classList.add(dataColor);
+    tableTitles.classList.add(dataColor);
+    inputs.forEach(input => input.classList.add(dataColor));
+    if (buttons) {
+        buttons.forEach(button => button.classList.add(dataColor));
+    }
+    tableheadrs.forEach(header => header.classList.add(dataColor));
+}
+function togglePageTheme() {
+    let color = colorIndicator.getAttribute("data-color") == 'dark' ? 'light' : 'dark';
+    colorIndicator.setAttribute("data-color", color);
+    setPageTheme(color);
+    addColorModeToLocalStorage(color);
+}
 //#endregion
+
 export {
-    Product, productId, products, title, price, taxes, ads,
-    discount, total, count, category, search, btnCreate, btnSearchByTitle,
+    Product, productId, products, title, price, taxes, ads, body,
+    discount, total, count, category, search, btnCreate, btnSearchByTitle, colorIndicator,
     btnSearchByCat, btnDeleteAll, btnCancel, contentTable, divAddButtons, divContainer, productsNumber,
-    loadProducts, addProducts, editProduct, updateProduct, searchByTitle, searchByCategory, validate,
-    addToLocalStorage, createProductsTable, clearData, deleteProduct, deleteAllProducts, getSelectedProduct
+    loadProducts, addProducts, editProduct, updateProduct, searchByTitle, searchByCategory, validate, togglePageTheme,
+    addToLocalStorage, createProductsTable, clearData, deleteProduct, deleteAllProducts, getSelectedProduct, setPageTheme
 };

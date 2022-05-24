@@ -4,33 +4,40 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content=">Product Managment applying CRUDS with javascript"
-    />
+    <meta name="description" content=">Product Managment applying CRUDS with javascript" />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/model-popup.css" />
     <link rel="icon" type="image/svg" href="images/favicon.svg" />
     <title>Product Management System | Mona Elshikh</title>
   </head>
   <body>
+    <div class="color-mode">
+      <label>
+        <input type="checkbox" data-color  id="color-indicator">
+        <span class="check"></span>
+      </label>
+    </div>
     <!-- The Modal -->
     <section id="myModal" class="modal"></div>
     </section>
-    <!-- End -->
+    <!-- End Modal -->
     <section class="container" role="main">
-      <h1>Product Managment System</h1>
+      <section class="head">
+        <h1>Product Managment System</h1>
+      </section>
       <section class="content">
         <input type="text" placeholder="title" name="title" />
-        <input type="number" placeholder="price" name="price" value="0"/>
-        <input type="number" placeholder="taxes" name="taxes" value="0"/>
-        <input type="number" placeholder="ads" name="ads" value="0"/>
-        <input type="number" placeholder="discount" name="discount" value="0"/>
-        <span>Total: <label name="total"></label></span>
+        <div class="div-price">
+          <input type="number" placeholder="price" name="price" value="0"/>
+          <input type="number" placeholder="taxes" name="taxes" value="0"/>
+          <input type="number" placeholder="ads" name="ads" value="0"/>
+          <input type="number" placeholder="discount" name="discount" value="0"/>
+          <span name="total"></span>
+        </div>
         <input type="number" placeholder="count" name="count" value="1"/>
         <input type="text" placeholder="category" name="category" />
         <div id="add-buttons">
-          <button id="btnCreate" class="btn-big">Create</button
+          <button id="btnCreate" >Create</button
           ><button id="btnCancel" class="btn-hidden btn-small">Cancel</button>
         </div>
       </section>

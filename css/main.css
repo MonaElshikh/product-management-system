@@ -6,85 +6,185 @@
   }
 :root{
     --text-color:aliceblue;
+    --dark-text-color:#333;
     --green-color:cadetblue;
+    --purble-color:#6e2493;
+    --red-color:#a41c1c;
     --border-radius: 5px;
     --font-family:system-ui;
     --letter-spacing: 1.5px;
     --font-size-small: 10px;
+} 
+html{
+  scroll-behavior: smooth;
 }
-  body {
+body {
       padding: 0;
       margin: 0;
       background-color: #333;
       color: var(--text-color);
+      font-family: var(--font-family);
   }
-  html{
-    scroll-behavior: smooth;
-  }
-::placeholder{
+ ::placeholder{
     text-transform: uppercase;
+    font-family:var(--font-family);
 }
 input{
+  width: 100% ;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  outline: none;
   border-radius: var(--border-radius);
+  font-family:var(--font-family);
 }
 input:focus{
   box-shadow:0 0 5px 1px lightseagreen inset;
 }
+button{
+  width: 100%;
+  font-family:var(--font-family);
+  padding: 10px;
+  margin: 10px 0;
+  background-color: var(--green-color);
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+  font-weight: bold;
+  letter-spacing: var(--letter-spacing);
+  cursor: pointer;
+  text-transform: uppercase;
+}
 button:hover{
   box-shadow: 0 0 5px 1px wheat inset;
 }
-/* ************************************************************************** */
-.container {
-    padding: 30px 40px ;
-  }
-
-.container h1 {
-    font-size: 24px;
-    font-family:var(--font-family);
-    text-align: center;
-    letter-spacing: var(--letter-spacing);
-    text-transform: uppercase;
-  }
-  /****************************** Start Content & Search sections ******************************/
-  .container .content,
-  .container .search 
-   {
+h1,h3{
+  color: var(--green-color);
+  margin: 10px;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing);
+  text-align: center;
+}
+/***************************************** End Globals ******************************************/
+/***************************** Start light/dart mode component ****************************/
+input[type="checkbox"] {
+  visibility: hidden;
+  display: none;
+}
+.check{
+  position: relative;
+  display: block;
+  width: 45px;
+  height: 20px;
+  background-color: #111;
+  cursor: pointer;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: ease-in 0.5s;
+  margin: 10px;
+}
+.check::before {
+  content: '';
+  position: absolute;
+  top:2px;
+  left:2px;
+  width: 16px;
+  height: 16px;
+  background-color: #f7eeee;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+.check::after {
+  content: '';
+  position: absolute;
+  top:2px;
+  right:2px;
+  width: 16px;
+  height: 16px;
+  background-color: #666;
+  border-radius: 50%;
+  transition: 0.5s;
+  transform: translateX(50px);
+}
+input[type="checkbox"]:checked ~.check {
+  background-color: lightgray;
+}
+input[type="checkbox"]:checked ~.check::before {
+ transform: translateX(-50px)
+}
+input[type="checkbox"]:checked ~.check::after {
+  transform: translateX(0px)
+ }
+/***************************** End Change color light/dart component ****************************/
+/**************************** Start Light/dark mode theme ******************************************/
+ body.light {
+  background-color: aliceblue;
+  color: var(--dark-text-color);
+}
+button.light {
+  background-color: var(--purble-color) !important;
+}
+input.light {
+  background-color: #c5b5cd;
+  color: #111;
+}
+h1.light,h3.light {
+  color:  var(--purble-color);
+}
+.div-price> span.light { 
+  background-color: var(--purble-color);
+  color: var(--text-color);
+}
+.data-table td.light {
+  color: var(--purble-color);
+}
+.table-header.light {
+  border-top: solid 2px black;
+}
+.data-table.light {
+  border-bottom: solid 2px black;
+}
+tr:first-child.light {
+  border-top: 1pt solid black;
+  border-bottom: 1pt solid black;
+}
+/**************************** End Light/dark mode theme ******************************************/
+/****************************** Start Content & Search sections ******************************/
+  .content,
+  .search ,
+  .data {
     padding: 0 25px;
   }
-  .container .content > input,
-  .container .search > input  {
-    padding: 10px;
-    margin: 10px 0;
-    outline: none;
+  .color-mode {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 30px 20px 0;
   }
-  .container .content > input{
-      width: 100% !important;
+ .div-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  .container .content > input:nth-child(2),
-  .container .content > input:nth-child(3),
-  .container .content > input:nth-child(4),
-  .container .content > input:nth-child(5) {
-      width:250px !important;
+ .div-price> input {
+      width:20% !important;
   }
-  .container .content >span {
-      display: inline-block;
+.div-price> span {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       background-color: var(--green-color);
       padding: 5px;
       border-radius: var(--border-radius);
   }
-  .container .content >button {
-   width: 100%;
+  
+.div-price> span::before {
+    content: 'Total: ';
   }
-  .container .search > input {
-      width: 100%;
-  }
-  .container .search >button:not(:last-of-type) {
+.search > button:not(:last-of-type) {
       width: 49% !important;
   }
-  .container .search>button:last-of-type {
-     width:100%;
-  }
-  .search-buttons{
+  .search-buttons {
     display: flex;
     justify-content: space-between;
   }
@@ -94,48 +194,27 @@ button:hover{
     margin-right: 10px;
   }
   .btn-small{
-    width: 30% !important;
-  }
-  .btn-big {
-    width: 100% !important;
-  }
-  .btn-small,
-  .btn-big {
-    padding: 10px;
-    margin: 10px 0;
-    background-color: var(--green-color);
-    border: none;
-    border-radius: var(--border-radius);
-    color: var(--text-color);
-    font-family:var(--font-family);
-    font-weight: bold;
-    letter-spacing: var(--letter-spacing);
-    cursor: pointer;
-    text-transform: uppercase;
+    width: 45% !important;
   }
   /****************************** End Content & Search sections ******************************/
 
   /********************************* Start Data sections *************************************/
-  .container .data {
+.data {
     overflow-x: auto;
-    border-top: solid 2px var(--text-color);
-    border-bottom: solid 2px var(--text-color);
-    margin-top: 10px;
+    margin-top: 20px;
   }
-  .container .table-header {
+.table-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-top: solid 2px var(--text-color);
   }
-  .container .data .table-header> h3 {
-    text-transform: uppercase;
-    color: var(--green-color);
-  }
-.container .data-table {
+.data-table {
     width: 100%;
     border-collapse: collapse;
+    border-bottom: solid 1px var(--text-color);
 }
-.container .data-table >tbody:first-child>tr {
+.data-table > tbody:first-child>tr {
   text-transform: uppercase;
   color: var(--green-color);
   font-size: 16px;
@@ -148,52 +227,44 @@ button:hover{
 tr:not(:last-child) {
     border-bottom: 1pt solid lightgray;
 }
-.container .data-table tr td {
+.data-table tr td {
  padding: 10px;
 }
 .actions-buttons {
+    width: auto;
     padding: 6px;
-    text-transform: uppercase;
-    background-color: var(--green-color);
-    color: var(--text-color);
-    border: none;
-    border-radius: var(--border-radius);
     font-size: var(--font-size-small);
 }
   /********************************* End Data sections *********************************/
 
   /********************************* Start Media query *********************************/
-  @media (max-width: 730px) {
-    .container .content > input{
-        width: 100% !important;
-    }
-    .container .search >button {
-        width: 100% !important;
-        max-width: 100%!important;
+@media (min-width:320px) {
+.container{
+      padding: 10px;
     }
   }
-  @media (width:1400px) {
-    .container .content > input:nth-child(2),
-    .container .content > input:nth-child(3),
-    .container .content > input:nth-child(4),
-    .container .content > input:nth-child(5) {
-        width: 314px !important
+@media (min-width: 576px) {
+.container{
+      padding: 20px;
+    }
+.head> h1{
+      font-size: 20px;
     }
   }
-  @media (min-width:1440px) {
-    .container .content > input:nth-child(2),
-    .container .content > input:nth-child(3),
-    .container .content > input:nth-child(4),
-    .container .content > input:nth-child(5) {
-        width: 324px;
+@media (min-width: 768px){
+    .container{
+      padding: 25px;
+    }
+.head> h1{
+      font-size: 22px;
     }
   }
-  @media (min-width:1680px) {
-    .container .content > input:nth-child(2),
-    .container .content > input:nth-child(3),
-    .container .content > input:nth-child(4),
-    .container .content > input:nth-child(5) {
-        width: 384px;
+@media (min-width: 992px){
+    .container{
+      padding: 30px;
+    }
+.head> h1{
+      font-size: 24px;
     }
   }
   /********************************* End Media query *********************************/

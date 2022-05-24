@@ -25,11 +25,13 @@
   border-top-left-radius:  var(--border-radius);
   border-top-right-radius:  var(--border-radius);
   padding: 2px 16px;
-  background-color: var(--green-color);
-  color: white;
+  background-color: var(--red-color);
 }
-.modal-header >h3{
+.modal-header > h3{
   margin: 10px 0px;
+  color: white;
+  text-align: left;
+  font-size: 18px;
 }
   /* Modal Body */
 .modal-body {
@@ -37,6 +39,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.modal-body > p {
+  color: var(--red-color);
+}
+.modal-body > div > button {
+  background-color: var(--red-color);
 }
   /* The Close Button */
   .close {
@@ -52,9 +60,3 @@
     text-decoration: none;
     cursor: pointer;
   }
-  /* Modal Footer */
-.modal-footer {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: var(--green-color);
-}

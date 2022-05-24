@@ -1,10 +1,14 @@
 
+//#region Declaration
 let modal = document.querySelector(".modal");
 let modelContent;
 let modelHeader;
 let modelBody;
 let btnYes;
 let btnNo;
+//#endregion
+
+//#region Methods
 function openModal(modalDesign, message, header, size, deleteAll = false) {
     modal.innerHTML = modalDesign;
     modelContent = document.querySelector(".modal-content");
@@ -39,4 +43,5 @@ function closeModal() {
     modal.removeChild(modelContent);
     modal.style.display = "none";
 }
+//#endregion
 export { openModal, closeModal, modal };
