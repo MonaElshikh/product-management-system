@@ -27,7 +27,7 @@
   padding: 2px 16px;
   background-color: var(--red-color);
 }
-.modal-header > h3{
+.modal-header > h3 {
   margin: 10px 0px;
   color: white;
   text-align: left;
