@@ -5,8 +5,8 @@
     box-sizing: border-box;
   }
 :root{
-    --text-color:aliceblue;
-    --dark-text-color:#333;
+    --light-color:aliceblue;
+    --dark-color:#333;
     --green-color:cadetblue;
     --purble-color:#6e2493;
     --red-color:#a41c1c;
@@ -14,6 +14,7 @@
     --border-radius: 5px;
     --letter-spacing: 1.5px;
     --font-size-small: 10px;
+    --text-transform:uppercase
 } 
 html{
   scroll-behavior: smooth;
@@ -21,15 +22,15 @@ html{
 body {
       padding: 0;
       margin: 0;
-      background-color: #333;
-      color: var(--text-color);
+      background-color: var(--dark-color);
+      color: var(--light-color);
       font-family: var(--font-family);
       transition: 0.6s;
   }
  ::placeholder{
-    text-transform: uppercase;
+    text-transform: var(--text-transform);
     font-family:var(--font-family);
-    color: #333;
+    color: var(--dark-color);
 }
 input{
   width: 100% ;
@@ -41,7 +42,7 @@ input{
   font-family:var(--font-family);
 }
 input:focus{
-  box-shadow:0 0 5px 1px lightseagreen inset;
+  box-shadow:0 0 5px 2px var(--green-color) inset;
 }
 button{
   width: 100%;
@@ -51,57 +52,57 @@ button{
   background-color: var(--green-color);
   border: none;
   border-radius: var(--border-radius);
-  color: var(--text-color);
+  color: var(--light-color);
   font-weight: bold;
   letter-spacing: var(--letter-spacing);
   cursor: pointer;
-  text-transform: uppercase;
+  text-transform: var(--text-transform);;
 }
 button:hover{
-  box-shadow: 0 0 5px 1px wheat inset;
+  box-shadow:0 0 5px 1px var(--light-color);
 }
 h1,h3{
   color: var(--green-color);
   margin: 10px;
-  text-transform: uppercase;
+  text-transform: var(--text-transform);;
   letter-spacing: var(--letter-spacing);
   text-align: center;
 }
 /***************************************** End Globals ******************************************/
 /**************************** Start Light/dark mode theme ******************************************/
  body.light {
-  background-color: aliceblue;
-  color: var(--dark-text-color);
+  background-color: var(--light-color);
+  color: var(--dark-color);
 }
 button.light {
   background-color: var(--purble-color);
 }
 input.light {
-  background-color: #c5b5cd;
-  color: #111;
+  background-color: #d7d6d8;
+  color: var(--dark-color);
 }
 input.light:focus {
-  box-shadow:0 0 5px 1px #4d2a4c inset;
+  box-shadow:0 0 5px 1px var(--purble-color) inset;
 }
 h1.light,h3.light {
   color:  var(--purble-color);
 }
 .div-price> span.light { 
   background-color: var(--purble-color);
-  color: var(--text-color);
+  color: var(--light-color);
 }
 .data-table td.light {
   color: var(--purble-color);
 }
 .table-header.light {
-  border-top: solid 2px black;
+  border-top: solid 2px var(--dark-color);
 }
 .data-table.light {
-  border-bottom: solid 2px black;
+  border-bottom: solid 2px var(--dark-color);
 }
 tr:first-child.light {
-  border-top: 1pt solid black;
-  border-bottom: 1pt solid black;
+  border-top: 1pt solid var(--dark-color);
+  border-bottom: 1pt solid var(--dark-color);
 }
 .color-mode {
   display: flex;
@@ -121,10 +122,10 @@ tr:first-child.light {
   box-shadow: 0 0 5px 2px;
 }
 .check {
-  background-color: white;
+  background-color: var(--light-color);
 }
 .check.light {
-  background-color: #111;
+  background-color: var(--dark-color);
 }
 .bullet ,
 .bullet.light {
@@ -136,11 +137,11 @@ tr:first-child.light {
 }
 .bullet {
   left: 5px;
-  background-color: #111 !important;
+  background-color: var(--dark-color) !important;
 }
 .bullet.light {
  right: 5px;
- background-color: white !important;
+ background-color: var(--light-color) !important;
  transform: translateX(22px);
 }
 /**************************** End Light/dark mode theme ******************************************/
@@ -184,22 +185,22 @@ tr:first-child.light {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: solid 2px var(--text-color);
+    border-top: solid 2px var(--light-color);
   }
 .data-table {
     width: 100%;
     border-collapse: collapse;
-    border-bottom: solid 1px var(--text-color);
+    border-bottom: solid 1px var(--light-color);
 }
 .data-table > tbody:first-child>tr {
-  text-transform: uppercase;
+  text-transform: var(--text-transform);;
   color: var(--green-color);
   font-size: 16px;
   font-weight: bold;
 }
  tr:first-child {
-    border-top: 1pt solid var(--text-color);
-    border-bottom: 1pt solid var(--text-color);
+    border-top: 1pt solid var(--light-color);
+    border-bottom: 1pt solid var(--light-color);
 }
 tr:not(:last-child) {
     border-bottom: 1pt solid lightgray;

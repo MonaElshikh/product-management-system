@@ -13,7 +13,7 @@ class Modal {
     <div class="modal-content">
     <div class="modal-header">
         <span id="btnClose" class="close">&times;</span>
-        <h3></h3>
+        <h4></h4>
     </div>
     <div class="modal-body">
         <p></p>
@@ -27,7 +27,7 @@ class Modal {
         this.modal = document.querySelector(`#${modalId}`);
         this.modal.innerHTML = design || this.modalDesign;
         this.modelContent = document.querySelector(".modal-content");
-        this.modelHeader = document.querySelector(".modal-header>h3");
+        this.modelHeader = document.querySelector(".modal-header>h4");
         this.modelBody = document.querySelector(`.modal-body>p`);
         this.btnYes = document.querySelector("#btnYes");
         this.btnNo = document.querySelector("#btnNo");

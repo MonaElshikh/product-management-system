@@ -1,11 +1,11 @@
 
 //#region imporst
 import * as productManagment from "/js/product-managment.js";
-import m from "/js/model-popup.js";
+import modalPopup from "/js/model-popup.js";
 //#endregion
 
 //#region  Declaration
-let _modal = new m("myModal", "");
+let modal = new modalPopup("myModal", "");
 //#endregion
 
 //#region Calls
@@ -87,7 +87,7 @@ productManagment.btnCancel.addEventListener("click", function () {
 
 // DeleteAll button
 productManagment.btnDeleteAll.addEventListener("click", function () {
-    _modal.open("Delete All! Are your sure?", "Delete All", "", true);
+    modal.open("Delete All! Are your sure?", "Delete All", "", true);
 });
 
 // edit/delete product
@@ -95,7 +95,7 @@ productManagment.contentTable.addEventListener("click", function (e) {
     productManagment.getSelectedProduct(e);
     switch (e.target.innerHTML) {
         case "Delete":
-            _modal.open("Delete! Are your sure?", "Delete", "", false);
+            modal.open("Delete! Are your sure?", "Delete", "", false);
             break;
         case "Update":
             productManagment.editProduct();
@@ -110,7 +110,7 @@ document.addEventListener("click", function (e) {
     switch (id) {
         case "btnClose":
         case "btnNo":
-            _modal.close();
+            modal.close();
             productManagment.loadPageTheme();
             break;
         case "btnYes":
@@ -124,7 +124,7 @@ document.addEventListener("click", function (e) {
                 console.log(`delete one record`);
                 productManagment.deleteProduct();
             }
-            _modal.close();
+            modal.close();
             productManagment.loadPageTheme();
             break;
     }
