@@ -24,7 +24,6 @@ class Product {
 }
 let products = [];
 let productId;
-let buttons;
 //#endregion Declaration
 
 //#region  get page controls
@@ -49,14 +48,16 @@ let divContainer = document.querySelector(".container");
 let productsNumber = document.querySelector("#products-no");
 let colorIndicator = document.querySelector("#color-indicator");
 let colorButton = document.querySelector(".color-mode");
-colorButton.title = "Switch page color";
 let inputs = Array.from(document.querySelectorAll("input"));
 let h1 = document.querySelector("h1");
 let h3 = document.querySelector("h3");
+let tableData = document.querySelector(".data");
 let tableheadrs = Array.from(document.querySelectorAll(".data-table td"));
 let divTableHeader = document.querySelector(".table-header");
 let divDataTable = document.querySelector(".data-table");
-let tableTitles = document.querySelector(".data-table>tbody>tr")
+let tableTitles = document.querySelector(".data-table>tbody>tr");
+let buttons = document.querySelectorAll("button");
+let bullet = document.querySelector(".bullet");
 
 //#endregion
 
@@ -85,6 +86,7 @@ function addProducts(count) {
             category.value);
         products.push(product);
     }
+    window.scrollTo(0, tableData.offsetTop);
     addToLocalStorage(products);
     createProductsTable(products);
     clearData();
@@ -172,6 +174,7 @@ function updateProduct() {
             p.category = category.value;
         }
     });
+    window.scrollTo(0, tableData.offsetTop);
     addToLocalStorage(products);
     loadProducts();
     clearData(true);
@@ -188,13 +191,13 @@ function deleteAllProducts() {
 }
 // search by title
 function searchByTitle(title) {
-    products = products.filter(p => p.title.toLowerCase().includes(title.toLowerCase()));
-    createProductsTable(products);
+    let productsByTitle = products.filter(p => p.title.toLowerCase().includes(title.toLowerCase()));
+    createProductsTable(productsByTitle);
 }
 // search by title
 function searchByCategory(category) {
-    products = products.filter(p => p.category.toLowerCase().includes(category.toLowerCase()));
-    createProductsTable(products);
+    let productsByCategory = products.filter(p => p.category.toLowerCase().includes(category.toLowerCase()));
+    createProductsTable(productsByCategory);
 }
 //clear product data
 function clearData(cancelUpdate = false) {
@@ -205,6 +208,7 @@ function clearData(cancelUpdate = false) {
     discount.value = "0";
     category.value = "";
     total.innerHTML = "";
+    search.value = "";
     count.value = "1";
     if (cancelUpdate) {
         btnCreate.innerHTML = "Create";
@@ -226,6 +230,7 @@ function addColorModeToLocalStorage(currentMode) {
 }
 // reset all controls themes
 function resetPageThemes() {
+    colorIndicator.classList.remove("light", "dark")
     body.classList.remove("light", "dark");
     h1.classList.remove("light", "dark");
     h3.classList.remove("light", "dark");
@@ -234,6 +239,7 @@ function resetPageThemes() {
     divTableHeader.classList.remove("light", "dark");
     divDataTable.classList.remove("light", "dark");
     tableTitles.classList.remove("light", "dark");
+    bullet.classList.remove("light");
     inputs.forEach(input => input.classList.remove("light", "dark"));
     if (buttons) {
         buttons.forEach(button => button.classList.remove("light", "dark"));
@@ -243,6 +249,10 @@ function resetPageThemes() {
 // set all controls themes
 function setPageTheme(dataColor) {
     resetPageThemes();
+    colorButton.title = dataColor == "dark" ? 'Light mode' : 'Dark mode';
+    colorIndicator.classList.add(dataColor);
+    bullet.classList.add(dataColor);
+    colorIndicator.setAttribute("data-color", dataColor);
     body.classList.add(dataColor);
     h1.classList.add(dataColor);
     h3.classList.add(dataColor);

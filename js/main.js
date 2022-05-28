@@ -28,7 +28,6 @@ if (!localStorage.getItem("data-color")) {
     productManagment.setPageTheme("dark");
 }
 else {
-    console.log(`inside else main.js loading the current theme.`);
     productManagment.setPageTheme(localStorage.getItem("data-color"));
 }
 //calculate total price after moving from in ads button input

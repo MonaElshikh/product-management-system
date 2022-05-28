@@ -10,8 +10,8 @@
     --green-color:cadetblue;
     --purble-color:#6e2493;
     --red-color:#a41c1c;
-    --border-radius: 5px;
     --font-family:system-ui;
+    --border-radius: 5px;
     --letter-spacing: 1.5px;
     --font-size-small: 10px;
 } 
@@ -24,10 +24,12 @@ body {
       background-color: #333;
       color: var(--text-color);
       font-family: var(--font-family);
+      transition: 0.6s;
   }
  ::placeholder{
     text-transform: uppercase;
     font-family:var(--font-family);
+    color: #333;
 }
 input{
   width: 100% ;
@@ -66,67 +68,20 @@ h1,h3{
   text-align: center;
 }
 /***************************************** End Globals ******************************************/
-/***************************** Start light/dart mode component ****************************/
-input[type="checkbox"] {
-  visibility: hidden;
-  display: none;
-}
-.check{
-  position: relative;
-  display: block;
-  width: 45px;
-  height: 20px;
-  background-color: #111;
-  cursor: pointer;
-  border-radius: 20px;
-  overflow: hidden;
-  transition: ease-in 0.5s;
-  margin: 10px;
-}
-.check::before {
-  content: '';
-  position: absolute;
-  top:2px;
-  left:2px;
-  width: 16px;
-  height: 16px;
-  background-color: #f7eeee;
-  border-radius: 50%;
-  transition: 0.5s;
-}
-.check::after {
-  content: '';
-  position: absolute;
-  top:2px;
-  right:2px;
-  width: 16px;
-  height: 16px;
-  background-color: #666;
-  border-radius: 50%;
-  transition: 0.5s;
-  transform: translateX(50px);
-}
-input[type="checkbox"]:checked ~.check {
-  background-color: lightgray;
-}
-input[type="checkbox"]:checked ~.check::before {
- transform: translateX(-50px)
-}
-input[type="checkbox"]:checked ~.check::after {
-  transform: translateX(0px)
- }
-/***************************** End Change color light/dart component ****************************/
 /**************************** Start Light/dark mode theme ******************************************/
  body.light {
   background-color: aliceblue;
   color: var(--dark-text-color);
 }
 button.light {
-  background-color: var(--purble-color) !important;
+  background-color: var(--purble-color);
 }
 input.light {
   background-color: #c5b5cd;
   color: #111;
+}
+input.light:focus {
+  box-shadow:0 0 5px 1px #4d2a4c inset;
 }
 h1.light,h3.light {
   color:  var(--purble-color);
@@ -148,18 +103,52 @@ tr:first-child.light {
   border-top: 1pt solid black;
   border-bottom: 1pt solid black;
 }
+.color-mode {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 30px 20px 0;
+}
+.check ,
+.check.light {
+  position: relative;
+  display: block;
+  width: 55px;
+  height: 29px;
+  cursor: pointer;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 5px 2px;
+}
+.check {
+  background-color: white;
+}
+.check.light {
+  background-color: #111;
+}
+.bullet ,
+.bullet.light {
+  position: absolute;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.bullet {
+  left: 5px;
+  background-color: #111 !important;
+}
+.bullet.light {
+ right: 5px;
+ background-color: white !important;
+ transform: translateX(22px);
+}
 /**************************** End Light/dark mode theme ******************************************/
 /****************************** Start Content & Search sections ******************************/
   .content,
   .search ,
   .data {
     padding: 0 25px;
-  }
-  .color-mode {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    padding: 30px 20px 0;
   }
  .div-price {
     display: flex;
@@ -177,27 +166,15 @@ tr:first-child.light {
       padding: 5px;
       border-radius: var(--border-radius);
   }
-  
 .div-price> span::before {
     content: 'Total: ';
-  }
-.search > button:not(:last-of-type) {
-      width: 49% !important;
-  }
-  .search-buttons {
-    display: flex;
-    justify-content: space-between;
   }
   .btn-hidden {
     display: none;
     width: 49%;
     margin-right: 10px;
   }
-  .btn-small{
-    width: 45% !important;
-  }
   /****************************** End Content & Search sections ******************************/
-
   /********************************* Start Data sections *************************************/
 .data {
     overflow-x: auto;
@@ -247,6 +224,16 @@ tr:not(:last-child) {
 .container{
       padding: 20px;
     }
+    .search > button:not(:last-of-type) {
+      width: 49% !important;
+  }
+  .search-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  .btn-small{
+    width: 45% !important;
+  }
 .head> h1{
       font-size: 20px;
     }
@@ -255,6 +242,16 @@ tr:not(:last-child) {
     .container{
       padding: 25px;
     }
+    .search > button:not(:last-of-type) {
+      width: 49% !important;
+  }
+  .search-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  .btn-small{
+    width: 45% !important;
+  }
 .head> h1{
       font-size: 22px;
     }
