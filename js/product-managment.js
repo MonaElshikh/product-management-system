@@ -50,7 +50,7 @@ let colorIndicator = document.querySelector("#color-indicator");
 let colorButton = document.querySelector(".color-mode");
 let inputs = Array.from(document.querySelectorAll("input"));
 let h1 = document.querySelector("h1");
-let h3 = document.querySelector("h3");
+let h2 = document.querySelector("h2");
 let tableData = document.querySelector(".data");
 let tableheadrs = Array.from(document.querySelectorAll(".data-table td"));
 let divTableHeader = document.querySelector(".table-header");
@@ -246,7 +246,7 @@ function resetPageThemes() {
     colorIndicator.classList.remove("light", "dark")
     body.classList.remove("light", "dark");
     h1.classList.remove("light", "dark");
-    h3.classList.remove("light", "dark");
+    h2.classList.remove("light", "dark");
     total.classList.remove("light", "dark");
     divTableHeader.classList.remove("light", "dark");
     divTableHeader.classList.remove("light", "dark");
@@ -268,7 +268,7 @@ function setPageTheme(dataColor) {
     colorIndicator.setAttribute("data-color", dataColor);
     body.classList.add(dataColor);
     h1.classList.add(dataColor);
-    h3.classList.add(dataColor);
+    h2.classList.add(dataColor);
     total.classList.add(dataColor);
     divTableHeader.classList.add(dataColor);
     divDataTable.classList.add(dataColor);

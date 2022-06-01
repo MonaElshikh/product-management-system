@@ -4,16 +4,14 @@ import * as productManagment from "/js/product-managment.js";
 import modalPopup from "/js/model-popup.js";
 //#endregion
 
-//#region  Declaration
-let modal = new modalPopup("myModal", "");
-//#endregion
-
 //#region Calls
 //load  products
 productManagment.loadProducts();
 
 // load page theme 
 productManagment.loadPageTheme();
+
+let modal = new modalPopup("myModal", "");
 
 // change page color mode
 productManagment.colorIndicator.addEventListener("click", function () {
